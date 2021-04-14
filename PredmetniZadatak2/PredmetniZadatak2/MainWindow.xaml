@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PredmetniZadatak2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="6000" Width="3200"
+        WindowState="Maximized">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Height="50" Background="CornflowerBlue">
+            <Button x:Name="LoadBtn" Margin="5,0,0,0" Content="Load XML" HorizontalAlignment="Left" Height="40" FontWeight="Bold" Width="200" Click="LoadBtn_Click"/>
+            <ProgressBar x:Name="progressBar" Margin="210, 0, 0, 0" HorizontalAlignment="Left" Height="40" Width="200" Minimum="0" Maximum="100"/>
+            <Label Content="Zoom:" Margin="415,0,0,0" HorizontalAlignment="Left" Height="40" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <TextBlock x:Name="ZoomTextBox" Height="40" Width="100" HorizontalAlignment="Left" Margin="520,0,0,0" Background="LightGray"
+                         FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Padding="10">
+                <Run Text="{Binding ElementName=ZoomSlider, Path=Value}"/>
+                <Run Text="%"/>
+            </TextBlock>
+            <Slider x:Name="ZoomSlider" Margin="625,15,0,0" Maximum="100" Minimum="1" Value="50" TickFrequency="0.25" IsSnapToTickEnabled="True" TickPlacement="BottomRight"/>
+        </Grid>
+        <Grid>
+            <ScrollViewer  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" >
+                <Canvas  Name="mapCanvas" Height="2200" Width="2200">
+                    <Canvas.LayoutTransform>
+                        <ScaleTransform ScaleX="{Binding ElementName=ZoomSlider, Path=Value}"
+                                     ScaleY="{Binding ElementName=ZoomSlider, Path=Value}"/>
+                    </Canvas.LayoutTransform>
+                </Canvas>
+            </ScrollViewer>
+        </Grid>
+    </DockPanel>
 </Window>

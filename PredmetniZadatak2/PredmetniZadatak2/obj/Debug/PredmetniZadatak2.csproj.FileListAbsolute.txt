@@ -1,0 +1,15 @@
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\bin\Debug\PredmetniZadatak2.exe.config
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\bin\Debug\PredmetniZadatak2.exe
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\bin\Debug\PredmetniZadatak2.pdb
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\obj\Debug\PredmetniZadatak2.csprojAssemblyReference.cache
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\obj\Debug\MainWindow.g.cs
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\obj\Debug\App.g.cs
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\obj\Debug\PredmetniZadatak2_MarkupCompile.cache
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\obj\Debug\PredmetniZadatak2_MarkupCompile.lref
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\obj\Debug\MainWindow.baml
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\obj\Debug\PredmetniZadatak2.g.resources
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\obj\Debug\PredmetniZadatak2.Properties.Resources.resources
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\obj\Debug\PredmetniZadatak2.csproj.GenerateResource.cache
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\obj\Debug\PredmetniZadatak2.csproj.CoreCompileInputs.cache
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\obj\Debug\PredmetniZadatak2.exe
+C:\Users\Cogi\Desktop\faks\4. godina\Softver sa kriticnim odzivom\Zadatak2\PredmetniZadatak2\PredmetniZadatak2\PredmetniZadatak2\obj\Debug\PredmetniZadatak2.pdb
