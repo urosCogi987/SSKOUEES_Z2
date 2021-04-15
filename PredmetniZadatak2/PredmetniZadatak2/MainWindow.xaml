@@ -6,19 +6,22 @@
         xmlns:local="clr-namespace:PredmetniZadatak2"
         mc:Ignorable="d"
         Title="MainWindow" Height="3200" Width="3200"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         WindowState="Maximized">
     <DockPanel>
         <Grid DockPanel.Dock="Top" Height="50" Background="CornflowerBlue">
-            <Button x:Name="LoadBtn" Margin="5,0,0,0" Content="Load XML" HorizontalAlignment="Left" Height="40" FontWeight="Bold" Width="200" Click="LoadBtn_Click"/>
-            <ProgressBar x:Name="progressBar" Margin="210,0,0,0" HorizontalAlignment="Left" Height="40" Width="200" Minimum="0" Maximum="100"/>
-            <TextBlock x:Name="progressTextBlock"  TextAlignment="Center" HorizontalAlignment="Left" Height="40" Width="200" Margin="210,0,0,0" FontWeight="Bold" /> <!--RenderTransformOrigin="0.653,4.414"-->
-            <Label Content="Zoom:" Margin="415,0,0,0" HorizontalAlignment="Left" Height="40" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-            <TextBlock x:Name="ZoomTextBox" Height="40" Width="100" HorizontalAlignment="Left" Margin="520,0,0,0" Background="LightGray"
+            <Button x:Name="LoadBtn" Margin="5,0,0,0" Content="Load XML" HorizontalAlignment="Left" Height="40" FontWeight="Bold" Width="100" Click="LoadBtn_Click"/>
+            <Button x:Name="DrawBtn" Margin="105,0,0,0" Content="Draw Scheme" HorizontalAlignment="Left" Height="40" FontWeight="Bold" Width="100" Click="DrawBtn_Click"/>
+            <TextBlock Name="fileSource"  Width="100" Background="White" HorizontalAlignment="Left" Height="40" Margin="210,0,0,0" FontSize="10" Padding="10" TextAlignment="Center" Text="{Binding Path=FilePath}"/>
+            <ProgressBar x:Name="progressBar" Margin="335,0,0,0" HorizontalAlignment="Left" Height="40" Width="100" Minimum="0" Maximum="100" Background="White"/>  <!--RenderTransformOrigin="0.653,4.414"-->
+            <TextBlock x:Name="progressTextBlock" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Left" Height="40" Width="100" Margin="335,0,0,0" FontWeight="Bold" RenderTransformOrigin="0.653,4.414"/>
+            <Label Content="Zoom:" Margin="445,0,0,0" HorizontalAlignment="Left" Height="40" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <TextBlock x:Name="ZoomTextBox" Height="40" Width="100" HorizontalAlignment="Left" Margin="550,0,0,0" Background="LightGray"
                          FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Padding="10">
                 <Run Text="{Binding ElementName=ZoomSlider, Path=Value}"/>
-                <Run Text="%"/>
+                <Run Text="x"/>
             </TextBlock>
-            <Slider x:Name="ZoomSlider" Margin="625,15,0,0" Maximum="10" Minimum="0.1" Value="5" TickFrequency="0.025" IsSnapToTickEnabled="True" TickPlacement="BottomRight"/>
+            <Slider x:Name="ZoomSlider" Margin="655,15,0,0" Maximum="10" Minimum="0.1" Value="5" TickFrequency="0.025" IsSnapToTickEnabled="True" TickPlacement="BottomRight"/>
         </Grid>
         <Grid>
             <ScrollViewer  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
