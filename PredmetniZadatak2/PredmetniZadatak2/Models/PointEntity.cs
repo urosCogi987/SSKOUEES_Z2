@@ -15,8 +15,10 @@ namespace PredmetniZadatak2.Models
         private Brush brush;
         private double pointX;
         private double pointY;
+        private double latitude;
+        private double longitude;
 
-
+        
         public long Id
         {
             get { return id; }
@@ -47,6 +49,16 @@ namespace PredmetniZadatak2.Models
             get { return pointY; }
             set { pointY = value; }
         }
+        public double Latitude
+        {
+            get { return latitude; }
+            set { latitude = value; }
+        }
+        public double Longitude
+        {
+            get { return longitude; }
+            set { longitude = value; }
+        }        
 
 
         public PointEntity() { }

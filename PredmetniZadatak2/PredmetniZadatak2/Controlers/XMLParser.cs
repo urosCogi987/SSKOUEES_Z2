@@ -36,7 +36,7 @@ namespace PredmetniZadatak2.Controlers
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(filename);
             XmlNodeList nodeList;
-            nodeList = xmlDocument.DocumentElement.SelectNodes("/NetworkModel/Substations/NodeEntity");
+            nodeList = xmlDocument.DocumentElement.SelectNodes("/NetworkModel/Nodes/NodeEntity");
 
             foreach (XmlNode node in nodeList)
             {
@@ -57,7 +57,7 @@ namespace PredmetniZadatak2.Controlers
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(filename);
             XmlNodeList nodeList;
-            nodeList = xmlDocument.DocumentElement.SelectNodes("/NetworkModel/Substations/SwitchEntity");
+            nodeList = xmlDocument.DocumentElement.SelectNodes("/NetworkModel/Switches/SwitchEntity");
 
             foreach (XmlNode node in nodeList)
             {
@@ -79,7 +79,7 @@ namespace PredmetniZadatak2.Controlers
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(filename);
             XmlNodeList nodeList;
-            nodeList = xmlDocument.DocumentElement.SelectNodes("/NetworkModel/Substations/SwitchEntity");
+            nodeList = xmlDocument.DocumentElement.SelectNodes("/NetworkModel/Lines/LineEntity");
 
             foreach (XmlNode node in nodeList)
             {
