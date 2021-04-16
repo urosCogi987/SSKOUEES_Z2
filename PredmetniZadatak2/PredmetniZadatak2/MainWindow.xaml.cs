@@ -25,8 +25,11 @@ namespace PredmetniZadatak2
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private double pointX, pointY;
-        private List<PointEntity> pointEntities = new List<PointEntity>();
-        private List<LineEntity> lineEntities = new List<LineEntity>();
+        private HashSet<PointEntity> pointEntities = new HashSet<PointEntity>();
+        private HashSet<LineEntity> lineEntities = new HashSet<LineEntity>();
+        private HashSet<SubstationEntity> substationEntities = new HashSet<SubstationEntity>();
+        private HashSet<NodeEntity> nodeEntities = new HashSet<NodeEntity>();
+        private HashSet<SwitchEntity> switchEntities = new HashSet<SwitchEntity>();
 
         private string filePath;         
         public string FilePath
@@ -81,13 +84,14 @@ namespace PredmetniZadatak2
 
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 40, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "40%";
-            XMLParser.LoadSubstations(pointEntities, pointX, pointY, FilePath);
-            XMLParser.LoadNodes();
-            XMLParser.LoadSwitches();
+            XMLParser.LoadSubstations(pointEntities, substationEntities, pointX, pointY, FilePath);
+            XMLParser.LoadNodes(pointEntities, nodeEntities, pointX, pointY, FilePath);
+            XMLParser.LoadSwitches(pointEntities, switchEntities, pointX, pointY, FilePath);
+            XMLParser.LoadLines(lineEntities, FilePath);
 
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 60, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "60%";
-            DrawElements();
+            
 
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 80, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "80%";
@@ -104,11 +108,6 @@ namespace PredmetniZadatak2
         private void DrawBtn_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void DrawElements()
-        {
-
-        }
+        }        
     }
 }

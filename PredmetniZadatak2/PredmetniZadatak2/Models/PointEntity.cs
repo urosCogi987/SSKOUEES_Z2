@@ -42,11 +42,13 @@ namespace PredmetniZadatak2.Models
             get { return pointX; }
             set { pointX = value; }
         }
-
         public double PointY
         {
             get { return pointY; }
             set { pointY = value; }
         }
+
+
+        public PointEntity() { }
     }
 }

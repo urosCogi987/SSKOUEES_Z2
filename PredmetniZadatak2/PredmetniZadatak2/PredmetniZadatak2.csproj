@@ -71,7 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\LineEntity.cs" />
+    <Compile Include="Models\NodeEntity.cs" />
+    <Compile Include="Models\Point.cs" />
     <Compile Include="Models\PointEntity.cs" />
+    <Compile Include="Models\SubstationEntity.cs" />
+    <Compile Include="Models\SwitchEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -9,19 +9,8 @@ using System.Xml;
 namespace PredmetniZadatak2.Controlers
 {
     public class XMLParser
-    {
-        private List<PointEntity> pointEntities = new List<PointEntity>();
-        //private List<LineEntity> lineEntities = new List<LineEntity>();
-        //private string fileName;
-
-        //public string FileName
-        //{
-        //    get { return fileName; }
-        //    set { fileName = value; }
-        //}
-
-
-        public static void LoadSubstations(List<PointEntity> entities, double pointX, double pointY, string filename)
+    {      
+        public static void LoadSubstations(HashSet<PointEntity> entities, HashSet<SubstationEntity> substationEntities, double pointX, double pointY, string filename)
         {
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(filename);
@@ -30,18 +19,91 @@ namespace PredmetniZadatak2.Controlers
 
             foreach (XmlNode node in nodeList)
             {
+                SubstationEntity subEntity = new SubstationEntity();
 
+                subEntity.Id = long.Parse(node.SelectSingleNode("Id").InnerText);
+                subEntity.Name = node.SelectSingleNode("Name").InnerText;
+                subEntity.PointX = double.Parse(node.SelectSingleNode("X").InnerText);
+                subEntity.PointY = double.Parse(node.SelectSingleNode("Y").InnerText);
+
+                entities.Add(subEntity);
+                substationEntities.Add(subEntity);
+            }
+        }        
+
+        public static void LoadNodes(HashSet<PointEntity> entities, HashSet<NodeEntity> nodeEntities, double pointX, double pointY, string filename)
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(filename);
+            XmlNodeList nodeList;
+            nodeList = xmlDocument.DocumentElement.SelectNodes("/NetworkModel/Substations/NodeEntity");
+
+            foreach (XmlNode node in nodeList)
+            {
+                NodeEntity nodeEntity = new NodeEntity();
+
+                nodeEntity.Id = long.Parse(node.SelectSingleNode("Id").InnerText);
+                nodeEntity.Name = node.SelectSingleNode("Name").InnerText;
+                nodeEntity.PointX = double.Parse(node.SelectSingleNode("X").InnerText);
+                nodeEntity.PointY = double.Parse(node.SelectSingleNode("Y").InnerText);
+
+                entities.Add(nodeEntity);
+                nodeEntities.Add(nodeEntity);
             }
         }
 
-        public static void LoadSwitches()
+        public static void LoadSwitches(HashSet<PointEntity> entities, HashSet<SwitchEntity> switchEntities, double pointX, double pointY, string filename)
         {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(filename);
+            XmlNodeList nodeList;
+            nodeList = xmlDocument.DocumentElement.SelectNodes("/NetworkModel/Substations/SwitchEntity");
 
+            foreach (XmlNode node in nodeList)
+            {
+                SwitchEntity swEntity = new SwitchEntity();
+
+                swEntity.Id = long.Parse(node.SelectSingleNode("Id").InnerText);
+                swEntity.Name = node.SelectSingleNode("Name").InnerText;
+                swEntity.Status = node.SelectSingleNode("Status").InnerText;
+                swEntity.PointX = double.Parse(node.SelectSingleNode("X").InnerText);
+                swEntity.PointY = double.Parse(node.SelectSingleNode("Y").InnerText);                
+
+                entities.Add(swEntity);
+                switchEntities.Add(swEntity);
+            }
         }
 
-        public static void LoadNodes()
+        public static void LoadLines(HashSet<LineEntity> lineEntities, string filename)
         {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(filename);
+            XmlNodeList nodeList;
+            nodeList = xmlDocument.DocumentElement.SelectNodes("/NetworkModel/Substations/SwitchEntity");
 
+            foreach (XmlNode node in nodeList)
+            {
+                LineEntity lineEntity = new LineEntity();
+
+                lineEntity.Id = long.Parse(node.SelectSingleNode("Id").InnerText);
+                lineEntity.Name = node.SelectSingleNode("Name").InnerText;
+                if (node.SelectSingleNode("IsUnderground").InnerText.Equals("true"))
+                {
+                    lineEntity.IsUnderground = true;
+                }
+                else
+                {
+                    lineEntity.IsUnderground = false;
+                }
+                lineEntity.R = float.Parse(node.SelectSingleNode("R").InnerText);
+                lineEntity.ConductorMaterial = node.SelectSingleNode("ConductorMaterial").InnerText;
+                lineEntity.LineType = node.SelectSingleNode("LineType").InnerText;
+                lineEntity.ThermalConstantHeat = long.Parse(node.SelectSingleNode("ThermalConstantHeat").InnerText);
+                lineEntity.FirstEnd = long.Parse(node.SelectSingleNode("FirstEnd").InnerText);
+                lineEntity.SecondEnd = long.Parse(node.SelectSingleNode("SecondEnd").InnerText);
+
+                lineEntities.Add(lineEntity);
+            }
         }
     }
 }
