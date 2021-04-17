@@ -29,8 +29,8 @@ namespace PredmetniZadatak2
         private HashSet<SubstationEntity> substationEntities = new HashSet<SubstationEntity>();
         private HashSet<NodeEntity> nodeEntities = new HashSet<NodeEntity>();
         private HashSet<SwitchEntity> switchEntities = new HashSet<SwitchEntity>();
-
-        private HashSet<Point> gridPoints = new HashSet<Point>();
+       
+        private static Dictionary<long, Point> entitiesOnCanvas = new Dictionary<long, Point>();
 
         private double minLatitude, maxLatitude, minLongitude, maxLongitude;
 
@@ -89,7 +89,7 @@ namespace PredmetniZadatak2
 
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 20, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "20%";
-            LoadGrid();
+            
 
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 40, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "40%";
@@ -128,57 +128,44 @@ namespace PredmetniZadatak2
 
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 100, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "100%";
-        }
-
-        private void LoadGrid()
-        {
-            Point p;
-            HashSet<Point> points = new HashSet<Point>();
-
-            int iovi = 1000;
-            int jotovi = 1000;
-
-            for (int i = 0; i < iovi; i = i + 3) 
-            {
-                for (int j = 0; j < jotovi; j = j + 2) 
-                {
-                    p = new Point(i, j);
-                    points.Add(p);
-                }
-            }
-
-            gridPoints = points;
-        }
+        }        
 
         private void DrawBtn_Click(object sender, RoutedEventArgs e)
         {
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 20, System.Windows.Threading.DispatcherPriority.Background);
-            progressTextBlock.Text = "33%";
+            progressTextBlock.Text = "20%";
 
             Point point = new Point();
             foreach (SubstationEntity entity in substationEntities)
             {
-                point = Calculator.GetCoordinates(entity, maxLatitude, minLatitude, maxLongitude, minLongitude);
-                Painter.DrawEntities(entity, entity.Color, point, mapCanvas);
+                point = Calculator.GetCoordinates(entity, maxLatitude, minLatitude, maxLongitude, minLongitude, mapCanvas.Width, mapCanvas.Height);
+                Painter.DrawPointEntities(entity, entity.Color, point, mapCanvas);
+                entitiesOnCanvas.Add(entity.Id, point);
             }
-            progressBar.Dispatcher.Invoke(() => progressBar.Value = 66, System.Windows.Threading.DispatcherPriority.Background);
-            progressTextBlock.Text = "66%";
+            progressBar.Dispatcher.Invoke(() => progressBar.Value = 40, System.Windows.Threading.DispatcherPriority.Background);
+            progressTextBlock.Text = "40%";
 
             foreach (NodeEntity entity in nodeEntities)
             {
-                point = Calculator.GetCoordinates(entity, maxLatitude, minLatitude, maxLongitude, minLongitude);
-                Painter.DrawEntities(entity, entity.Color, point, mapCanvas);
+                point = Calculator.GetCoordinates(entity, maxLatitude, minLatitude, maxLongitude, minLongitude, mapCanvas.Width, mapCanvas.Height);
+                Painter.DrawPointEntities(entity, entity.Color, point, mapCanvas);
+                entitiesOnCanvas.Add(entity.Id, point);
             }
-            progressBar.Dispatcher.Invoke(() => progressBar.Value = 90, System.Windows.Threading.DispatcherPriority.Background);
-            progressTextBlock.Text = "90%";
+            progressBar.Dispatcher.Invoke(() => progressBar.Value = 60, System.Windows.Threading.DispatcherPriority.Background);
+            progressTextBlock.Text = "60%";
 
             foreach (SwitchEntity entity in switchEntities)
             {
-                point = Calculator.GetCoordinates(entity, maxLatitude, minLatitude, maxLongitude, minLongitude);
-                Painter.DrawEntities(entity, entity.Color, point, mapCanvas);
+                point = Calculator.GetCoordinates(entity, maxLatitude, minLatitude, maxLongitude, minLongitude, mapCanvas.Width, mapCanvas.Height);
+                Painter.DrawPointEntities(entity, entity.Color, point, mapCanvas);
+                entitiesOnCanvas.Add(entity.Id, point);
             }
-            progressBar.Dispatcher.Invoke(() => progressBar.Value = 90, System.Windows.Threading.DispatcherPriority.Background);
-            progressTextBlock.Text = "90%";            
+            progressBar.Dispatcher.Invoke(() => progressBar.Value = 80, System.Windows.Threading.DispatcherPriority.Background);
+            progressTextBlock.Text = "80%";
+
+            Painter.DrawLineEnitites(lineEntities, mapCanvas, entitiesOnCanvas);
+            progressBar.Dispatcher.Invoke(() => progressBar.Value = 80, System.Windows.Threading.DispatcherPriority.Background);
+            progressTextBlock.Text = "80%";
         }        
     }
 }

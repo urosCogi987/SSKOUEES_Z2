@@ -11,6 +11,7 @@ namespace PredmetniZadatak2.Models
     {
         private long id;
         private string name;
+        private string tooltip;        
         private bool isUnderground;
         private float r;
         private string conductorMaterial;
@@ -30,7 +31,12 @@ namespace PredmetniZadatak2.Models
         {
             get { return name; }
             set { name = value; }
-        }       
+        }
+        public string Tooltip
+        {
+            get { return tooltip; }
+            set { tooltip = value; }
+        }
         public bool IsUnderground
         {
             get { return isUnderground; }

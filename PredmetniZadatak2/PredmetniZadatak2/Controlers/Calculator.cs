@@ -5,18 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace PredmetniZadatak2.Controlers
 {
     public class Calculator
     {
         private static Dictionary<long, Point> entitiesOnCanvas = new Dictionary<long, Point>();
-        private static HashSet<PointEntity> pointEntities = new HashSet<PointEntity>();
-        //public Dictionary<long, Point> EntitiesOnCanvas
-        //{
-        //    get { return entitiesOnCanvas; }
-        //    set { entitiesOnCanvas = value; }
-        //}       
+        private static HashSet<PointEntity> pointEntities = new HashSet<PointEntity>();           
 
 
         public static void CalculateMinMax(HashSet<PointEntity> entities, out double maxLatitude,  out double minLatitude,  out double maxLongitude,  out double minLongitude)
@@ -44,11 +40,11 @@ namespace PredmetniZadatak2.Controlers
             pointEntities = entities;
         }
 
-        public static Point GetCoordinates(PointEntity entity, double maxLatitude, double minLatitude, double maxLongitude, double minLongitude)
+        public static Point GetCoordinates(PointEntity entity, double maxLatitude, double minLatitude, double maxLongitude, double minLongitude, double width, double height)
         {
-            double valOfSingleLongitude = (maxLongitude - minLongitude) / 1000;     // pravimo 1000 delova(Longituda) jer nam je canvas 1000x1000
-            double valOfSingleLatitude = (maxLatitude - minLatitude) / 1000;
-
+            double valOfSingleLongitude = (maxLongitude - minLongitude) / width;      // pravimo 3000 delova(Longituda) jer nam je canvas 3000 x 3000
+            double valOfSingleLatitude = (maxLatitude - minLatitude) / height;
+            
             double x = Math.Round((entity.Longitude - minLongitude) / valOfSingleLongitude);    // koliko longituda stane u rastojanje izmedju trenutne i minimalne longitude
             double y = Math.Round((maxLatitude - entity.Latitude) / valOfSingleLatitude);
 
@@ -123,7 +119,9 @@ namespace PredmetniZadatak2.Controlers
             }
             
 
-            Point p = new Point(x, y);            
+            Point p = new Point(x, y);
+            entitiesOnCanvas.Add(entity.Id, p);
+
             return p;
         }
     }
