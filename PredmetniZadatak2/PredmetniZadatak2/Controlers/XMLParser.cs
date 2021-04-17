@@ -10,7 +10,7 @@ namespace PredmetniZadatak2.Controlers
 {
     public class XMLParser
     {      
-        public static void LoadSubstations(HashSet<PointEntity> entities, HashSet<SubstationEntity> substationEntities, double pointX, double pointY, string filename)
+        public static void LoadSubstations(HashSet<PointEntity> entities, HashSet<SubstationEntity> substationEntities, string filename)
         {
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(filename);
@@ -31,7 +31,7 @@ namespace PredmetniZadatak2.Controlers
             }
         }        
 
-        public static void LoadNodes(HashSet<PointEntity> entities, HashSet<NodeEntity> nodeEntities, double pointX, double pointY, string filename)
+        public static void LoadNodes(HashSet<PointEntity> entities, HashSet<NodeEntity> nodeEntities, string filename)
         {
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(filename);
@@ -52,7 +52,7 @@ namespace PredmetniZadatak2.Controlers
             }
         }
 
-        public static void LoadSwitches(HashSet<PointEntity> entities, HashSet<SwitchEntity> switchEntities, double pointX, double pointY, string filename)
+        public static void LoadSwitches(HashSet<PointEntity> entities, HashSet<SwitchEntity> switchEntities, string filename)
         {
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(filename);

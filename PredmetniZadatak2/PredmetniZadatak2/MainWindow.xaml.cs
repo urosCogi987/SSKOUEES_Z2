@@ -23,9 +23,7 @@ namespace PredmetniZadatak2
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
-    {
-        private double pointX, pointY;        
-
+    {        
         private HashSet<PointEntity> pointEntities = new HashSet<PointEntity>();
         private HashSet<LineEntity> lineEntities = new HashSet<LineEntity>();
         private HashSet<SubstationEntity> substationEntities = new HashSet<SubstationEntity>();
@@ -71,7 +69,6 @@ namespace PredmetniZadatak2
 
         private void LoadBtn_Click(object sender, RoutedEventArgs e)
         {
-
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 0, System.Windows.Threading.DispatcherPriority.Background);            
 
             OpenFileDialog ofd = new OpenFileDialog();
@@ -83,7 +80,7 @@ namespace PredmetniZadatak2
                 var onlyFileName = System.IO.Path.GetFileName(ofd.FileName);
                 FilePath = onlyFileName;
             }
-
+            
             if (FilePath != null)
             {
                 LoadBtn.IsEnabled = false;
@@ -96,9 +93,9 @@ namespace PredmetniZadatak2
 
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 40, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "40%";
-            XMLParser.LoadSubstations(pointEntities, substationEntities, pointX, pointY, FilePath);
-            XMLParser.LoadNodes(pointEntities, nodeEntities, pointX, pointY, FilePath);
-            XMLParser.LoadSwitches(pointEntities, switchEntities, pointX, pointY, FilePath);
+            XMLParser.LoadSubstations(pointEntities, substationEntities, FilePath);
+            XMLParser.LoadNodes(pointEntities, nodeEntities, FilePath);
+            XMLParser.LoadSwitches(pointEntities, switchEntities, FilePath);
             XMLParser.LoadLines(lineEntities, FilePath);
 
 
@@ -127,7 +124,7 @@ namespace PredmetniZadatak2
 
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 80, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "80%";
-            Calculator.CalculateMinMax(pointEntities, maxLatitude, minLatitude, maxLongitude, minLongitude);
+            Calculator.CalculateMinMax(pointEntities, out maxLatitude, out minLatitude, out maxLongitude, out minLongitude);
 
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 100, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "100%";
@@ -158,31 +155,30 @@ namespace PredmetniZadatak2
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 20, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "33%";
 
+            Point point = new Point();
             foreach (SubstationEntity entity in substationEntities)
             {
-
+                point = Calculator.GetCoordinates(entity, maxLatitude, minLatitude, maxLongitude, minLongitude);
+                Painter.DrawEntities(entity, entity.Color, point, mapCanvas);
             }
-
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 66, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "66%";
 
             foreach (NodeEntity entity in nodeEntities)
             {
-
+                point = Calculator.GetCoordinates(entity, maxLatitude, minLatitude, maxLongitude, minLongitude);
+                Painter.DrawEntities(entity, entity.Color, point, mapCanvas);
             }
-
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 90, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "90%";
 
             foreach (SwitchEntity entity in switchEntities)
             {
-
+                point = Calculator.GetCoordinates(entity, maxLatitude, minLatitude, maxLongitude, minLongitude);
+                Painter.DrawEntities(entity, entity.Color, point, mapCanvas);
             }
-
-            //double valOfSingleLongitude = (maxLongitude - minLongitude) / 1000;
-            //double valOfSingleLatitude = (maxLatitude - minLatitude) / 1000;
-
-            //double x = Math.Round(longi)
+            progressBar.Dispatcher.Invoke(() => progressBar.Value = 90, System.Windows.Threading.DispatcherPriority.Background);
+            progressTextBlock.Text = "90%";            
         }        
     }
 }

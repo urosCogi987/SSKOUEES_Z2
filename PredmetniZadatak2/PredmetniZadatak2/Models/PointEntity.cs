@@ -11,8 +11,7 @@ namespace PredmetniZadatak2.Models
     {
         private long id;
         private string name;
-        private string toolTip;
-        private Brush brush;
+        private string toolTip;        
         private double pointX;
         private double pointY;
         private double latitude;
@@ -33,12 +32,7 @@ namespace PredmetniZadatak2.Models
         {
             get { return toolTip; }
             set { toolTip = value; }
-        }
-        public Brush Brush
-        {
-            get { return brush; }
-            set { brush = value; }
-        }
+        }        
         public double PointX
         {
             get { return pointX; }
