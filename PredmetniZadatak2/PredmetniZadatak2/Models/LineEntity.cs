@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace PredmetniZadatak2.Models
 {
@@ -20,6 +21,8 @@ namespace PredmetniZadatak2.Models
         private long firstEnd;
         private long secondEnd;
         private List<Point> vertices;
+        private Brush color;        
+
 
 
         public long Id
@@ -77,8 +80,16 @@ namespace PredmetniZadatak2.Models
             get { return vertices; }
             set { vertices = value; }
         }
+        public Brush Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
 
 
-        public LineEntity() { }
+        public LineEntity() 
+        {
+            Color = Brushes.LightBlue;
+        }
     }
 }

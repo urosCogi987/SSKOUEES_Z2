@@ -25,7 +25,7 @@
         </Grid>
         <Grid>
             <ScrollViewer  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <Canvas  Name="mapCanvas" Height="3000" Width="3000">
+                <Canvas  Name="mapCanvas" Height="3000" Width="3000" MouseLeftButtonDown="mapCanvas_MouseLeftButtonDown">
                     <Canvas.LayoutTransform>
                         <ScaleTransform ScaleX="{Binding ElementName=ZoomSlider, Path=Value}"
                                      ScaleY="{Binding ElementName=ZoomSlider, Path=Value}"/>

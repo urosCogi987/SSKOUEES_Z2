@@ -123,6 +123,6 @@ namespace PredmetniZadatak2.Controlers
             entitiesOnCanvas.Add(entity.Id, p);
 
             return p;
-        }
+        }        
     }
 }

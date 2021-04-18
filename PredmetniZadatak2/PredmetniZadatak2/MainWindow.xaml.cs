@@ -34,10 +34,6 @@ namespace PredmetniZadatak2
 
         private double minLatitude, maxLatitude, minLongitude, maxLongitude;
 
-       
-
-
-
         #region onPropertyChanged
         private string filePath;         
         public string FilePath
@@ -59,6 +55,7 @@ namespace PredmetniZadatak2
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+        
 
         public MainWindow()
         {
@@ -163,9 +160,14 @@ namespace PredmetniZadatak2
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 80, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "80%";
 
-            Painter.DrawLineEnitites(lineEntities, mapCanvas, entitiesOnCanvas);
+            Painter.LineEntitiesCalculations(lineEntities, mapCanvas, entitiesOnCanvas);
             progressBar.Dispatcher.Invoke(() => progressBar.Value = 80, System.Windows.Threading.DispatcherPriority.Background);
             progressTextBlock.Text = "80%";
-        }        
+        }
+
+        private void mapCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
