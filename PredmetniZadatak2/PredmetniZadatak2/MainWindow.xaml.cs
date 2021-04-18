@@ -13,6 +13,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -31,8 +32,9 @@ namespace PredmetniZadatak2
         private HashSet<SwitchEntity> switchEntities = new HashSet<SwitchEntity>();
        
         private static Dictionary<long, Point> entitiesOnCanvas = new Dictionary<long, Point>();
+        private static List<Shape> coloredNodes = new List<Shape>();
 
-        private double minLatitude, maxLatitude, minLongitude, maxLongitude;
+        private double minLatitude, maxLatitude, minLongitude, maxLongitude;        
 
         #region onPropertyChanged
         private string filePath;         
@@ -59,10 +61,10 @@ namespace PredmetniZadatak2
 
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
 
             DrawBtn.IsEnabled = false;
-        }
+        }        
 
         private void LoadBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -161,13 +163,103 @@ namespace PredmetniZadatak2
             progressTextBlock.Text = "80%";
 
             Painter.LineEntitiesCalculations(lineEntities, mapCanvas, entitiesOnCanvas);
-            progressBar.Dispatcher.Invoke(() => progressBar.Value = 80, System.Windows.Threading.DispatcherPriority.Background);
-            progressTextBlock.Text = "80%";
+            progressBar.Dispatcher.Invoke(() => progressBar.Value = 100, System.Windows.Threading.DispatcherPriority.Background);
+            progressTextBlock.Text = "100%";
         }
 
         private void mapCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Shape clickedEntity = e.OriginalSource as Shape;
 
+            if ((clickedEntity != null) && (clickedEntity is Line))
+            {                
+                string[] toolTip = clickedEntity.ToolTip.ToString().Split('\n');
+                double startNodeId = double.Parse((toolTip[3].Split(':'))[1]);
+                double endNodeId = double.Parse((toolTip[4].Split(':'))[1]);
+
+                foreach (Shape node in mapCanvas.Children)
+                {
+                    if (node.GetType().Name.ToString() == "Ellipse")
+                    {
+                        double nodeId = double.Parse(node.ToolTip.ToString().Split('\n')[1].Split(':')[1]);                        
+
+                        if (nodeId == startNodeId)
+                        {
+                            node.Fill = Brushes.Purple;
+                            coloredNodes.Add(node);
+                            AnimateNodes(node);
+                        }
+                        else if (nodeId == endNodeId)
+                        {
+                            node.Fill = Brushes.Purple;
+                            coloredNodes.Add(node);
+                            AnimateNodes(node);
+                        }
+                    }                    
+                }                                   
+            }                    
+        }
+
+        private void mapCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {            
+            foreach (Shape node in coloredNodes)
+            {
+                string nodeType = node.ToolTip.ToString().Split('\n')[0];
+
+                if (nodeType == "Substation")
+                {
+                    node.Fill = Brushes.Green;
+                }
+                else if (nodeType == "Node")
+                {
+                    node.Fill = Brushes.Blue;
+                }
+                else if (nodeType == "Switch")
+                {
+                    node.Fill = Brushes.Orange;
+                }                
+            }
+
+            coloredNodes.Clear();
+        }
+        
+        private void AnimateNodes(Shape node1)
+        {
+            DoubleAnimation widthAnimation = new DoubleAnimation
+            {
+                From = 9,
+                To = 90,
+                Duration = TimeSpan.FromSeconds(1.5)
+            };
+            DoubleAnimation heightAnimation = new DoubleAnimation
+            {
+                From = 9,
+                To = 90,
+                Duration = TimeSpan.FromSeconds(1.5)
+            };
+
+            Storyboard.SetTargetProperty(widthAnimation, new PropertyPath(Ellipse.WidthProperty));
+            Storyboard.SetTarget(widthAnimation, node1);
+
+            Storyboard.SetTargetProperty(heightAnimation, new PropertyPath(Ellipse.HeightProperty));
+            Storyboard.SetTarget(heightAnimation, node1);
+
+            Storyboard s1 = new Storyboard();
+            s1.Children.Add(widthAnimation);
+            s1.Children.Add(heightAnimation);
+
+            s1.Completed += (t, r) => StoryboardCompleted(node1);            
+            s1.Begin();           
+        }
+
+        private void StoryboardCompleted(Shape e)
+        {
+            DoubleAnimation myDoubleAnimation2 = new DoubleAnimation();
+            myDoubleAnimation2.From = 90;
+            myDoubleAnimation2.To = 9;
+            myDoubleAnimation2.Duration = new Duration(TimeSpan.FromSeconds(1.5));
+            e.BeginAnimation(Ellipse.WidthProperty, myDoubleAnimation2);
+            e.BeginAnimation(Ellipse.HeightProperty, myDoubleAnimation2);
         }
     }
 }

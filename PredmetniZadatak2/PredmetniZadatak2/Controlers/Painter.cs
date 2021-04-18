@@ -32,16 +32,16 @@ namespace PredmetniZadatak2.Controlers
 
             if (color == Brushes.Green)
             {
-                ellipse.ToolTip = "Substation \nID: " + entity.Id.ToString() + "\nName: " + entity.Name;
+                ellipse.ToolTip = "Substation\nID: " + entity.Id.ToString() + "\nName: " + entity.Name;
             }                
             else if (color == Brushes.Blue) 
             {
-                ellipse.ToolTip = "Node \nID: " + entity.Id.ToString() + "\nName: " + entity.Name;
+                ellipse.ToolTip = "Node\nID: " + entity.Id.ToString() + "\nName: " + entity.Name;
             }                
             else
             {
                 SwitchEntity switchEntity = (SwitchEntity)entity;
-                ellipse.ToolTip = "Switch \nID: " + entity.Id + "\nName: " + entity.Name + "\nStatus: " + switchEntity.Status;    
+                ellipse.ToolTip = "Switch\nID: " + entity.Id + "\nName: " + entity.Name + "\nStatus: " + switchEntity.Status;    
             }
                 
 
@@ -123,7 +123,7 @@ namespace PredmetniZadatak2.Controlers
             line.Y1 = pointA.Y + 4;
             line.X2 = pointB.X + 4;
             line.Y2 = pointB.Y + 4;
-            line.ToolTip = "Line\nID: " + l.Id.ToString() + "\nName: " + l.Name + "\nFirst end: " + l.FirstEnd.ToString() + "\nSecond end: " + l.SecondEnd.ToString();
+            line.ToolTip = "Line\nID: " + l.Id.ToString() + "\nName: " + l.Name + "\nFirst end: " + l.FirstEnd.ToString() + "\nSecond end: " + l.SecondEnd.ToString();            
 
             mapCanvas.Children.Add(line);
         }

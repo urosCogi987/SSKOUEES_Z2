@@ -19,13 +19,13 @@
             <TextBlock x:Name="ZoomTextBox" Height="40" Width="100" HorizontalAlignment="Left" Margin="550,0,0,0" Background="LightGray"
                          FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Padding="10">
                 <Run Text="{Binding ElementName=ZoomSlider, Path=Value}"/>
-                <Run Text="x"/>
+                <Run Text=""/>
             </TextBlock>
             <Slider x:Name="ZoomSlider" Margin="655,15,0,0" Maximum="10" Minimum="0.1" Value="0.575" TickFrequency="0.025" IsSnapToTickEnabled="True" TickPlacement="BottomRight"/>
         </Grid>
         <Grid>
             <ScrollViewer  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <Canvas  Name="mapCanvas" Height="3000" Width="3000" MouseLeftButtonDown="mapCanvas_MouseLeftButtonDown">
+                <Canvas  Name="mapCanvas" Height="3000" Width="3000" MouseLeftButtonDown="mapCanvas_MouseLeftButtonDown" MouseRightButtonDown="mapCanvas_MouseRightButtonDown">
                     <Canvas.LayoutTransform>
                         <ScaleTransform ScaleX="{Binding ElementName=ZoomSlider, Path=Value}"
                                      ScaleY="{Binding ElementName=ZoomSlider, Path=Value}"/>
